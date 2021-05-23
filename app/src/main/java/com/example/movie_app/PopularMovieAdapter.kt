@@ -13,7 +13,7 @@ import com.example.movie_app.viewmodels.MovieViewModel
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
-class MovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class PopularMovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
     var movieList = ArrayList<MovieModel>()       //
     var movieViewModel = MovieViewModel()
@@ -21,7 +21,8 @@ class MovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView
 
 
     init {
-        movieViewModel.loadMoviesFromMovieAdapter(movieList,3)
+        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(movieList,1)
+
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -30,7 +31,7 @@ class MovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.titleTextView)
+            textView = view.findViewById(R.id.titleTextView2)
             imageView = view.findViewById(R.id.movieImageView)
             view.setOnClickListener(this)
         }

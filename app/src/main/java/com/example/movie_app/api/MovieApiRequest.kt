@@ -11,4 +11,10 @@ interface MovieApiRequest {
         @Query("api_key") apiKey: String = "203aa479a47e83d43ff03861e0f7f20e",
         @Query("page") page: Int
     ):Response<MoviesResponse>
+
+   @GET("movie/upcoming")
+   suspend fun getUpcomingMovies(
+           @Query("api_key") apiKey:String = "203aa479a47e83d43ff03861e0f7f20e",
+           @Query("page")page:Int
+   ):Response<MoviesResponse>
 }
