@@ -1,4 +1,4 @@
-package com.example.movie_app
+package com.example.movie_app.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
 

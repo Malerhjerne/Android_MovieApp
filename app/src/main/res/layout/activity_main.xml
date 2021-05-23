@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.views.MainActivity">
+    tools:context=".views.MainActivity">
 
     <TextView
         android:id="@+id/popularMoviesTextView"
@@ -87,14 +87,14 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerviewUpComing" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewTopRated"
         android:layout_width="281dp"
         android:layout_height="140dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topRatedMoviesTextView"
-        tools:listitem="@layout/movie_recyclerview_layout"
-    />
+        tools:listitem="@layout/movie_recyclerview_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,17 +13,19 @@ import kotlinx.coroutines.*
 class MovieViewModel: ViewModel() {
     private val ApiKey: String = "203aa479a47e83d43ff03861e0f7f20e"
     private val pageNumber: Int = 2
-    var moviePopularRecylerListData: MutableLiveData<ArrayList<MovieModel>>
-    var movieUpcomingRecylerListData: MutableLiveData<ArrayList<MovieModel>>
 
+    var moviePopularRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
+    var movieUpcomingRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
+    var movieTopRatedRecyclerListData : MutableLiveData<ArrayList<MovieModel>>
     init {
-        moviePopularRecylerListData = MutableLiveData<ArrayList<MovieModel>>()
-        movieUpcomingRecylerListData = MutableLiveData<ArrayList<MovieModel>>()
+        moviePopularRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
+        movieUpcomingRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
+        movieTopRatedRecyclerListData= MutableLiveData<ArrayList<MovieModel>>()
     }
 
     /*Region Popular Movies */
     fun getPopularMovies(): MutableLiveData<ArrayList<MovieModel>> {
-        return moviePopularRecylerListData
+        return moviePopularRecyclerListData
     }
 
 
@@ -37,7 +39,7 @@ class MovieViewModel: ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     Log.i("test", response.body().toString())
                     val response = response.body()
-                    moviePopularRecylerListData.postValue(response!!.movies)
+                    moviePopularRecyclerListData.postValue(response!!.movies)
                 } else {
                     Log.d("LOG", "Server error")
                 }
@@ -57,7 +59,7 @@ class MovieViewModel: ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     Log.i("test", response.body().toString())
                     val response = response!!.body()
-                    moviePopularRecylerListData.postValue(response!!.movies)
+                    moviePopularRecyclerListData.postValue(response!!.movies)
 
                     /* Just for test */
                     copyList.addAll(response.movies)
@@ -73,21 +75,21 @@ class MovieViewModel: ViewModel() {
             }
         }
 
-    }/*END REGION */
+    }/*END REGION - POPULAR MOVIES*/
 
     /*REGION Upcoming Movies*/
     fun getUpcomingMovies(): MutableLiveData<ArrayList<MovieModel>> {
-        return movieUpcomingRecylerListData
+        return movieUpcomingRecyclerListData
     }
 
     fun loadUpcomingMovies(copyList: ArrayList<MovieModel>) {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = MovieRetroCall.apiService.getUpcomingMovies(ApiKey,pageNumber)
+                val response = MovieRetroCall.apiService.getTopRatedMovies(ApiKey,pageNumber)
                 if(response.isSuccessful && response.body()!= null){
                     val response = response!!.body()
-                    movieUpcomingRecylerListData.postValue(response!!.movies)
+                    movieUpcomingRecyclerListData.postValue(response!!.movies)
                     copyList.addAll(response.movies)
 
                     for(ele in copyList){
@@ -97,15 +99,45 @@ class MovieViewModel: ViewModel() {
                     Log.d("LOG", "Server error")
                 }
 
-
-
             }catch (exception:Exception){
                 exception.message?.let { Log.d("Error",it) }
             }
-
         }
-
     }
+    /* END REGION UPCOMING MOVIES*/
+
+    /* REGION Top Rated Movies */
+
+    /* END REGION Top Rated Movies*/
+
+    fun getTopRatedMovies():MutableLiveData<ArrayList<MovieModel>>{
+        return movieTopRatedRecyclerListData
+    }
+
+    fun loadTopRatedMovies(copyList: ArrayList<MovieModel>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = MovieRetroCall.apiService.getPopularMovies(ApiKey, pageNumber)
+                if (response.isSuccessful && response.body() != null) {
+                    Log.i("test", response.body().toString())
+                    val response = response!!.body()
+                    moviePopularRecyclerListData.postValue(response!!.movies)
+
+                    /* Just for test */
+                    copyList.addAll(response.movies)
+
+
+                } else {
+                    Log.d("LOG", "Server error")
+                }
+            } catch (exception: Exception) {
+                exception.message?.let {
+                    Log.d("ERROR", it)
+                }
+            }
+        }
+    }
+
 }
 
 

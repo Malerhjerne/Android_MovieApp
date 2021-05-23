@@ -1,4 +1,4 @@
-package com.example.movie_app.viewmodels
+package com.example.movie_app.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
+import com.example.movie_app.viewmodels.MovieViewModel
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
