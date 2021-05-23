@@ -34,7 +34,7 @@ class MovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView
             imageView = view.findViewById(R.id.movieImageView)
             view.setOnClickListener(this)
         }
-        override fun onClick(v: Viev?) {
+        override fun onClick(v: VieW?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION) {
                 clickListener.onItemClick(position);
