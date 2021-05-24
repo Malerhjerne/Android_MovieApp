@@ -22,7 +22,7 @@ class PopularMovieAdapter(private val clickListener:OnItemClickListener) : Recyc
 
 
     init {
-        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(movieList,1)
+        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(1)
 
     }
 

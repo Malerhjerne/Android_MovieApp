@@ -1,6 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <TextView
+        android:id="@+id/reviewTextView"
+        android:layout_width="339dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="76dp"
+        android:text="Review"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/EditUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+    <RadioGroup
+        android:id="@+id/RatingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="312dp"
+        android:layout_marginEnd="144dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_baseline_star_rate_24"
+            android:text="1" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/ic_baseline_star_rate_24"
+            android:text="2" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/ic_baseline_star_rate_24"
+            android:text="3" />
+
+        <RadioButton
+            android:id="@+id/rb4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/ic_baseline_star_rate_24"
+            android:text="4" />
+
+        <RadioButton
+            android:id="@+id/rb5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/ic_baseline_star_rate_24"
+            android:text="5" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editComment"
+        android:layout_width="245dp"
+        android:layout_height="94dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Make Your Personal Review"
+        android:textColor="@color/orange"
+        app:layout_constraintBottom_toTopOf="@+id/reviewTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintStart_toStartOf="parent"></EditText>
+
+    <Button
+        android:id="@+id/sendReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="68dp"
+        android:text="Submit"
+        app:layout_constraintBaseline_toBaselineOf="@+id/showLog"
+        app:layout_constraintEnd_toEndOf="parent"></Button>
+
+    <Button
+        android:id="@+id/showLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="12dp"
+        android:text="ShowlOg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></Button>
+
+    <ImageView
+        android:id="@+id/movieReviewImage"
+        android:layout_width="match_parent"
+        android:layout_height="189dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

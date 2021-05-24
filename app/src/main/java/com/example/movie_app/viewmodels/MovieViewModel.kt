@@ -14,9 +14,12 @@ class MovieViewModel: ViewModel() {
     private val ApiKey: String = "203aa479a47e83d43ff03861e0f7f20e"
     private val pageNumber: Int = 2
 
+    var moviePopularArrayList = ArrayList<MovieModel>();
+
     var moviePopularRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
     var movieUpcomingRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
     var movieTopRatedRecyclerListData : MutableLiveData<ArrayList<MovieModel>>
+
     init {
         moviePopularRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
         movieUpcomingRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
@@ -51,7 +54,7 @@ class MovieViewModel: ViewModel() {
         }
     }
 
-    fun loadPopularMoviesFromPopularMovieAdapter(copyList: ArrayList<MovieModel>, page: Int) {
+    fun loadPopularMoviesFromPopularMovieAdapter(page: Int) {  // copyList: ArrayList<MovieModel>
         // Do an asynchronous operation to fetch users
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -61,9 +64,9 @@ class MovieViewModel: ViewModel() {
                     val response = response!!.body()
                     moviePopularRecyclerListData.postValue(response!!.movies)
 
-                    /* Just for test */
-                    copyList.addAll(response.movies)
 
+                    //copyList.addAll(response.movies)
+                    moviePopularArrayList.addAll(response.movies)
 
                 } else {
                     Log.d("LOG", "Server error")
@@ -86,7 +89,7 @@ class MovieViewModel: ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = MovieRetroCall.apiService.getTopRatedMovies(ApiKey,pageNumber)
+                val response = MovieRetroCall.apiService.getUpcomingMovies(ApiKey,pageNumber)
                 if(response.isSuccessful && response.body()!= null){
                     val response = response!!.body()
                     movieUpcomingRecyclerListData.postValue(response!!.movies)
@@ -117,7 +120,7 @@ class MovieViewModel: ViewModel() {
     fun loadTopRatedMovies(copyList: ArrayList<MovieModel>) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = MovieRetroCall.apiService.getPopularMovies(ApiKey, pageNumber)
+                val response = MovieRetroCall.apiService.getTopRatedMovies(ApiKey, pageNumber)
                 if (response.isSuccessful && response.body() != null) {
                     Log.i("test", response.body().toString())
                     val response = response!!.body()

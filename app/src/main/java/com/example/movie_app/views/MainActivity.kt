@@ -2,6 +2,7 @@ package com.example.movie_app.views
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +51,11 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
 
         /*Calling Api */
         movieViewModel.loadPopularMovies()
-        movieViewModel.loadPopularMovies()
+      //  movieViewModel.loadPopularMoviesFromPopularMovieAdapter(1)
+
+        movieViewModel.loadTopRatedMovies(topRatedMovieList);
+
+
 
 
         /* Popular*/
@@ -95,6 +100,9 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
 
         } else {
             findViewById<Button>(R.id.testBtn).setOnClickListener({
+
+                Log.i("CHEK NU HER",movieViewModel.moviePopularArrayList.size.toString())
+                Log.i("CHEK NU HER",topRatedMovieList.size.toString())
             })
 
         }
