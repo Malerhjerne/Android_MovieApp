@@ -24,7 +24,7 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
 
 
     init {
-        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(movieList,1)
+        movieViewModel.loadPopularMovies(movieList,1)
 
     }
 

@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        popularMovieAdapter = PopularMovieAdapter()
+
         setContentView(R.layout.activity_main)
         val view = this.window.decorView
         val backgroundColor = view.resources.getColor(R.color.blackishBackground)
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity(){
         layoutManagerPopularMovies = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewPopularMovies.layoutManager = layoutManagerPopularMovies
 
-        popularMovieAdapter = PopularMovieAdapter()
+
         recyclerViewPopularMovies.adapter = popularMovieAdapter
 
         /* Upcoming*/
@@ -94,6 +96,11 @@ class MainActivity : AppCompatActivity(){
 
         } else {
             findViewById<Button>(R.id.testBtn).setOnClickListener({
+                    Log.i("CHEK API",topRatedMovieList.size.toString())
+                Log.i("CHEK API",upcomingMovieList.size.toString())
+                Log.i("CHEK API",popularMovieList.size.toString())
+
+
             })
 
         }
@@ -101,5 +108,11 @@ class MainActivity : AppCompatActivity(){
 
 
     }
+    override fun onStart() {
+        super.onStart()
+        movieViewModel.loadTopRatedMovies(topRatedMovieList)
+        movieViewModel.loadPopularMovies(popularMovieList,1)
+        movieViewModel.loadUpcomingMovies(upcomingMovieList)
 
+    }
 }

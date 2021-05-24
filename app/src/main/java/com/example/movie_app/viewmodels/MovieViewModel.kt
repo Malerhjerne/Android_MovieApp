@@ -32,29 +32,9 @@ class MovieViewModel: ViewModel() {
     }
 
 
-    fun loadPopularMovies() { // make it take a parameter to load specific site or make an counter that will increase the page num
 
-        // Asynchronous operation to fetch users
-        viewModelScope.launch(Dispatchers.IO) {
-            viewModelScope
-            try {
-                val response = MovieRetroCall.apiService.getPopularMovies(ApiKey, 1)
-                if (response.isSuccessful && response.body() != null) {
-                    Log.i("test", response.body().toString())
-                    val response = response.body()
-                    moviePopularRecyclerListData.postValue(response!!.movies)
-                } else {
-                    Log.d("LOG", "Server error")
-                }
-            } catch (exception: Exception) {
-                exception.message?.let {
-                    Log.d("ERROR", it)
-                }
-            }
-        }
-    }
 
-    fun loadPopularMoviesFromPopularMovieAdapter(copyList: ArrayList<MovieModel>,page: Int) {  //
+    fun loadPopularMovies(copyList: ArrayList<MovieModel>,page: Int) {  //
         // Do an asynchronous operation to fetch users
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -63,8 +43,6 @@ class MovieViewModel: ViewModel() {
                     Log.i("test", response.body().toString())
                     val response = response!!.body()
                     moviePopularRecyclerListData.postValue(response!!.movies)
-
-
                     copyList.addAll(response.movies)
                     moviePopularArrayList.addAll(response.movies)
 
