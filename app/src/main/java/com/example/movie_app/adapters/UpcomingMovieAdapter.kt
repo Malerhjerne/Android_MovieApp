@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +15,13 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movie_app.MovieFragment
 import com.example.movie_app.BlueFragment
 import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
 import com.example.movie_app.viewmodels.MovieViewModel
+import com.example.movie_app.views.MainActivity
+import com.google.gson.annotations.SerializedName
 
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
@@ -31,7 +35,7 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
 
     val movFragment = BlueFragment()
         private var pageCounter:Int = 1;
-    private lateinit var mainacc:Activity
+
         init {
             movieViewModel.loadUpcomingMovies(movieList)
             Log.i("Teess", "Er Vi her ")
@@ -61,6 +65,7 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
                     bundle.putFloat("movAvgRating", movieList[position].rating)
                     bundle.putString("movReleaseDate", movieList[position].releaseDate)
                     movFragment.setArguments(bundle)
+                    //mainacc.startfragment(bundle)
                 }
 
 

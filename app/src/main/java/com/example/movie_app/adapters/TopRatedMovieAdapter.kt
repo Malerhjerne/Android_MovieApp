@@ -1,5 +1,6 @@
 package com.example.movie_app.adapters
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import com.example.movie_app.views.MainActivity
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedViewHolder>()
     {
+
+        var mainacc = MainActivity()
 
       //  var movieList = ArrayList<MovieModel>()
         var movieViewModel = MovieViewModel()
@@ -41,10 +44,21 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
             }
 
             override fun onItemClick(position: Int) {
+                Log.i("CHEKKKpos",position.toString())
+                Log.i("CHEKKKtitle",movieList[position].title)
+                Log.i("CHEKKKid",movieList[position].id.toString())
 
-                    Log.i("CHEKKK",position.toString())
-                    Log.i("CHEKKK",movieList[position].title)
-                }
+                var bundle = Bundle()
+                bundle.putLong("movID", movieList[position].id)
+                bundle.putString("movTitle", movieList[position].title)
+                bundle.putString("movOverview", movieList[position].overview)
+                bundle.putString("movPosterPath", movieList[position].posterPath)
+                bundle.putString("movBackdrop", movieList[position].backdropPath)
+                bundle.putFloat("movAvgRating", movieList[position].rating)
+                bundle.putString("movReleaseDate", movieList[position].releaseDate)
+
+                mainacc.startfragment(bundle)
+            }
 
             override fun onClick(v: View?) {
                 val position = adapterPosition

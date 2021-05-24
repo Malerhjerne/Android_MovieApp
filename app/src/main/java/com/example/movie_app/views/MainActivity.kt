@@ -1,9 +1,11 @@
 package com.example.movie_app.views
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_app.BlueFragment
+import com.example.movie_app.MovieFragment
 import com.example.movie_app.R
 import com.example.movie_app.adapters.PopularMovieAdapter
 import com.example.movie_app.adapters.TopRatedMovieAdapter
@@ -109,6 +112,21 @@ class MainActivity : AppCompatActivity(){
         })*/
     }
 
+
+    /*fun startfragment(bundle: Bundle){
+
+
+        val intent = Intent(this, MovieActivity::class.java).apply{
+            putExtra("bigbundle", bundle)
+        }
+        startActivity(intent)
+
+        //findViewById<FragmentContainerView>(R.id.container)
+        Log.i("BIGtttt", "BIG TESTTTTTT")
+
+    }*/
+
+
     override fun onResume() {
         super.onResume()
         movieViewModel.loadTopRatedMovies(topRatedMovieList)
@@ -128,3 +146,4 @@ class MainActivity : AppCompatActivity(){
     }
 }
 }
+

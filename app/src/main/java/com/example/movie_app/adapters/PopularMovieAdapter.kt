@@ -1,5 +1,6 @@
 package com.example.movie_app.adapters
 
+import android.os.Bundle
 import android.os.Debug
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,11 +14,14 @@ import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
+import com.example.movie_app.views.MainActivity
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
+    var mainacc = MainActivity()
+    
     //var movieList = ArrayList<MovieModel>()       // used when calling api from adapter -- now api is called in viewmodel
     var movieViewModel = MovieViewModel()
     var movieList = movieViewModel.moviePopularArrayList
@@ -40,8 +44,20 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
         }
 
         override fun onItemClick(position: Int) {
-            Log.i("CHEKKK",position.toString())
-            Log.i("CHEKKK",movieList[position].title)
+            Log.i("CHEKKKpos",position.toString())
+            Log.i("CHEKKKtitle",movieList[position].title)
+            Log.i("CHEKKKid",movieList[position].id.toString())
+
+            var bundle = Bundle()
+            bundle.putLong("movID", movieList[position].id)
+            bundle.putString("movTitle", movieList[position].title)
+            bundle.putString("movOverview", movieList[position].overview)
+            bundle.putString("movPosterPath", movieList[position].posterPath)
+            bundle.putString("movBackdrop", movieList[position].backdropPath)
+            bundle.putFloat("movAvgRating", movieList[position].rating)
+            bundle.putString("movReleaseDate", movieList[position].releaseDate)
+
+            mainacc.startfragment(bundle)
         }
 
         override fun onClick(v: View?) {
