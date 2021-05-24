@@ -26,8 +26,8 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
     init {
       //  movieViewModel.loadPopularMovies(movieList)
       //  Log.i("Check API LoadPopular","Loading Popular")
-
     }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),OnItemClickListener {
         val textView: TextView
         val imageView: ImageView
