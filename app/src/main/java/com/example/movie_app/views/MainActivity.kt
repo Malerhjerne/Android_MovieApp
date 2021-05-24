@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movie_app.BlueFragment
 import com.example.movie_app.R
 import com.example.movie_app.adapters.PopularMovieAdapter
 import com.example.movie_app.adapters.TopRatedMovieAdapter
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity(){
         popularMovieAdapter = PopularMovieAdapter()
         upcomingMovieAdapter = UpcomingMovieAdapter()
         topRatedMovieAdapter = TopRatedMovieAdapter()
+
+
 
         setContentView(R.layout.activity_main)
         val view = this.window.decorView
@@ -91,25 +96,35 @@ class MainActivity : AppCompatActivity(){
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
         } else {
-            findViewById<Button>(R.id.testBtn).setOnClickListener({
-                    Log.i("CHEK API",topRatedMovieList.size.toString())
-                Log.i("CHEK API",upcomingMovieList.size.toString())
-                Log.i("CHEK API",popularMovieList.size.toString())
-
-
-            })
 
         }
+       /* findViewById<Button>(R.id.testBtn).setOnClickListener({
+            Log.i("CHEK API",topRatedMovieList.size.toString())
+            Log.i("CHEK API",upcomingMovieList.size.toString())
+            Log.i("CHEK API",popularMovieList.size.toString())
 
 
 
+
+        })*/
     }
-    /*
+
     override fun onResume() {
         super.onResume()
         movieViewModel.loadTopRatedMovies(topRatedMovieList)
         movieViewModel.loadPopularMovies(popularMovieList)
         movieViewModel.loadUpcomingMovies(upcomingMovieList)
 
-    }*/
+    }
+
+    fun startFragment(bundle: Bundle){
+
+            val movFragment = BlueFragment()
+        movFragment.setArguments(bundle)
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<BlueFragment>(R.id.fragment)
+
+    }
+}
 }
