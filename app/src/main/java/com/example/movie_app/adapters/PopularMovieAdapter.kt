@@ -57,7 +57,7 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
             bundle.putFloat("movAvgRating", movieList[position].rating)
             bundle.putString("movReleaseDate", movieList[position].releaseDate)
 
-            mainacc.startfragment(bundle)
+            //mainacc.startfragment(bundle)
         }
 
         override fun onClick(v: View?) {
