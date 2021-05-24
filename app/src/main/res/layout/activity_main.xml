@@ -24,7 +24,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPopular"
         android:layout_width="281dp"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -47,7 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewUpComing"
         android:layout_width="281dp"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
     <TextView
         android:id="@+id/topRatedMoviesTextView"
         android:layout_width="193dp"
-        android:layout_height="26dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Top Rated Movies"
         android:textColor="@color/orange"
@@ -89,7 +89,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewTopRated"
         android:layout_width="281dp"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

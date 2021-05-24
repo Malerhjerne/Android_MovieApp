@@ -18,22 +18,22 @@ private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
-    var movieList = ArrayList<MovieModel>()       //
+    //var movieList = ArrayList<MovieModel>()       // used when calling api from adapter -- now api is called in viewmodel
     var movieViewModel = MovieViewModel()
+    var movieList = movieViewModel.moviePopularArrayList
     private var pageCounter:Int = 1;
 
-
     init {
-        movieViewModel.loadPopularMovies(movieList,1)
+      //  movieViewModel.loadPopularMovies(movieList)
+      //  Log.i("Check API LoadPopular","Loading Popular")
 
     }
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),OnItemClickListener {
         val textView: TextView
         val imageView: ImageView
 
         init {
-            // Define click listener for the ViewHolder's View.
+            // Define listener for the ViewHolder's View.
             textView = view.findViewById(R.id.titleTextView2)
             imageView = view.findViewById(R.id.movieImageView)
             view.setOnClickListener(this)
@@ -52,11 +52,6 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
         }
     }
 
-    /*
-    interface OnItemClickListener{
-        fun onItemClick(position: Int);
-    }
-*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_recyclerview_layout,parent,false)
@@ -70,30 +65,25 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        viewHolder.textView.text = movieList[position].title
-
-        Log.i("MovieAdapter Number",position.toString())
+        Log.i("Check OnBindViewHolder Position",position.toString())
         Log.i("Chek Glide",movieList[position].posterPath.toString())
+
+        viewHolder.textView.text = movieList[position].title
 
         val urlTocall = String.format(api_url + movieList[position].posterPath,)
         Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
         Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
 
 
-        Log.i("NYCHECK",movieList.size.toString())
-        Log.i("NYCHECK",position.toString())
-
         if (position == movieList.size -1){
 
            // pageCounter++;
-
         }
-
     }
 
     fun setData(){
 
         notifyDataSetChanged()
-        Log.i("NYCHECK","Are ve Here")
+        Log.i("Check NotifyDataSetChanged","Are ve Here")
     }
 }

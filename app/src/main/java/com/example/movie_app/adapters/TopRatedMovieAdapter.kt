@@ -18,8 +18,9 @@ private const val api_url = "https://image.tmdb.org/t/p/w342/"
 class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedViewHolder>()
     {
 
-        var movieList = ArrayList<MovieModel>()
+      //  var movieList = ArrayList<MovieModel>()
         var movieViewModel = MovieViewModel()
+        var movieList = movieViewModel.movieTopRatedArrayList
         private var pageCounter:Int = 1;
 
         init {
@@ -43,9 +44,7 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
 
                     Log.i("CHEKKK",position.toString())
                     Log.i("CHEKKK",movieList[position].title)
-
                 }
-
 
             override fun onClick(v: View?) {
                 val position = adapterPosition
@@ -54,9 +53,6 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
                 }
             }
         }
-
-
-
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_toprated_recyclerview_layout,parent,false)
@@ -72,16 +68,10 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
 
             viewHolder.textView.text = movieList[position].title
 
-            Log.i("MovieAdapter Number",position.toString())
-            Log.i("Chek Glide",movieList[position].posterPath.toString())
-
             val urlTocall = String.format(api_url + movieList[position].posterPath,)
             Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
             Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
 
-
-            Log.i("TESSSSSS",movieList.size.toString())
-            Log.i("NYCHECK",position.toString())
 
             if (position == movieList.size -1){
                 // pageCounter++;
@@ -91,6 +81,6 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
         fun setData(){
 
             notifyDataSetChanged()
-            Log.i("Tessss","Are ve Here")
+            Log.i("Tessss","Are ve Here setData TOpRatedMovieAdapter")
         }
     }

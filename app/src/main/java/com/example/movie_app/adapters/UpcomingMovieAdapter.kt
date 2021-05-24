@@ -18,10 +18,10 @@ private const val api_url = "https://image.tmdb.org/t/p/w342/"
 class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingViewHolder>(){
 
 
-        var movieList = ArrayList<MovieModel>()       //
+      //  var movieList = ArrayList<MovieModel>()       //
         var movieViewModel = MovieViewModel()
+        var movieList = movieViewModel.movieUpcomingArrayList
         private var pageCounter:Int = 1;
-
 
         init {
             movieViewModel.loadUpcomingMovies(movieList)

@@ -2,9 +2,7 @@ package com.example.movie_app.viewmodels
 
 import android.graphics.Movie
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.movie_app.api.MovieRetroCall
 import com.example.movie_app.models.MovieModel
 import kotlinx.coroutines.*
@@ -12,18 +10,20 @@ import kotlinx.coroutines.*
 
 class MovieViewModel: ViewModel() {
     private val ApiKey: String = "203aa479a47e83d43ff03861e0f7f20e"
-    private val pageNumber: Int = 2
+    private val pageNumber: Int = 1
 
     var moviePopularArrayList = ArrayList<MovieModel>();
+    var movieUpcomingArrayList = ArrayList<MovieModel>()
+    var movieTopRatedArrayList = ArrayList<MovieModel>()
 
-    var moviePopularRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
-    var movieUpcomingRecyclerListData: MutableLiveData<ArrayList<MovieModel>>
-    var movieTopRatedRecyclerListData : MutableLiveData<ArrayList<MovieModel>>
+    var moviePopularRecyclerListData: MutableLiveData<ArrayList<MovieModel>> = MutableLiveData<ArrayList<MovieModel>>()
+    var movieUpcomingRecyclerListData: MutableLiveData<ArrayList<MovieModel>> = MutableLiveData<ArrayList<MovieModel>>()
+    var movieTopRatedRecyclerListData : MutableLiveData<ArrayList<MovieModel>> = MutableLiveData<ArrayList<MovieModel>>()
 
     init {
-        moviePopularRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
-        movieUpcomingRecyclerListData = MutableLiveData<ArrayList<MovieModel>>()
-        movieTopRatedRecyclerListData= MutableLiveData<ArrayList<MovieModel>>()
+        loadPopularMovies(moviePopularArrayList)
+        loadUpcomingMovies(movieUpcomingArrayList)
+        loadTopRatedMovies(movieTopRatedArrayList)
     }
 
     /*Region Popular Movies */
@@ -31,19 +31,16 @@ class MovieViewModel: ViewModel() {
         return moviePopularRecyclerListData
     }
 
-
-
-
-    fun loadPopularMovies(copyList: ArrayList<MovieModel>,page: Int) {  //
+    fun loadPopularMovies(copyList: ArrayList<MovieModel>){  //
         // Do an asynchronous operation to fetch users
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = MovieRetroCall.apiService.getPopularMovies(ApiKey, page)
+                val response = MovieRetroCall.apiService.getPopularMovies(ApiKey, pageNumber)
                 if (response.isSuccessful && response.body() != null) {
-                    Log.i("test", response.body().toString())
+                    Log.i("Check responsebody popular", response.body().toString())
                     val response = response!!.body()
                     moviePopularRecyclerListData.postValue(response!!.movies)
-                    copyList.addAll(response.movies)
+                    //copyList.addAll(response.movies)
                     moviePopularArrayList.addAll(response.movies)
 
                 } else {
@@ -69,13 +66,12 @@ class MovieViewModel: ViewModel() {
             try {
                 val response = MovieRetroCall.apiService.getUpcomingMovies(ApiKey,pageNumber)
                 if(response.isSuccessful && response.body()!= null){
+                    Log.i("Check responsebody upcoming ", response.body().toString())
                     val response = response!!.body()
                     movieUpcomingRecyclerListData.postValue(response!!.movies)
-                    copyList.addAll(response.movies)
+                    movieUpcomingArrayList.addAll(response.movies)
+                   //copyList.addAll(response.movies)
 
-                    for(ele in copyList){
-                        Log.i("Testing",ele.title)
-                    }
                 } else {
                     Log.d("LOG", "Server error")
                 }
@@ -89,8 +85,6 @@ class MovieViewModel: ViewModel() {
 
     /* REGION Top Rated Movies */
 
-    /* END REGION Top Rated Movies*/
-
     fun getTopRatedMovies():MutableLiveData<ArrayList<MovieModel>>{
         return movieTopRatedRecyclerListData
     }
@@ -100,13 +94,12 @@ class MovieViewModel: ViewModel() {
             try {
                 val response = MovieRetroCall.apiService.getTopRatedMovies(ApiKey, pageNumber)
                 if (response.isSuccessful && response.body() != null) {
-                    Log.i("test", response.body().toString())
+                    Log.i("Check responsebody topRated", response.body().toString())
                     val response = response!!.body()
                     moviePopularRecyclerListData.postValue(response!!.movies)
+                    movieTopRatedArrayList.addAll(response.movies)
 
-                    /* Just for test */
-                    copyList.addAll(response.movies)
-
+                  //  copyList.addAll(response.movies)
 
                 } else {
                     Log.d("LOG", "Server error")
@@ -118,7 +111,7 @@ class MovieViewModel: ViewModel() {
             }
         }
     }
-
+    /* END REGION Top Rated Movies*/
 }
 
 

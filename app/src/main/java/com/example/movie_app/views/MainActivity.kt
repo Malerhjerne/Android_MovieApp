@@ -41,18 +41,15 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularMovieAdapter = PopularMovieAdapter()
+        upcomingMovieAdapter = UpcomingMovieAdapter()
+        topRatedMovieAdapter = TopRatedMovieAdapter()
 
         setContentView(R.layout.activity_main)
         val view = this.window.decorView
         val backgroundColor = view.resources.getColor(R.color.blackishBackground)
         view.setBackgroundColor(backgroundColor)
 
-
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-
-
-
-
 
         /* Popular*/
         recyclerViewPopularMovies = findViewById(R.id.recyclerViewPopular)
@@ -60,7 +57,6 @@ class MainActivity : AppCompatActivity(){
 
         layoutManagerPopularMovies = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewPopularMovies.layoutManager = layoutManagerPopularMovies
-
 
         recyclerViewPopularMovies.adapter = popularMovieAdapter
 
@@ -71,7 +67,7 @@ class MainActivity : AppCompatActivity(){
         layoutManagerUpcoming = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewUpcomingMovies.layoutManager = layoutManagerUpcoming
 
-        upcomingMovieAdapter = UpcomingMovieAdapter()
+
         recyclerViewUpcomingMovies.adapter = upcomingMovieAdapter
 
         /*Top Rated */
@@ -81,13 +77,13 @@ class MainActivity : AppCompatActivity(){
         layoutManagerTopRated = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         recyclerViewTopRatedMovies.layoutManager = layoutManagerTopRated
 
-        topRatedMovieAdapter = TopRatedMovieAdapter()
+
         recyclerViewTopRatedMovies.adapter = topRatedMovieAdapter
 
         /*Observing */
-        movieViewModel.getPopularMovies().observe(this, { popularMovieAdapter.setData() })
-        movieViewModel.getUpcomingMovies().observe(this, { upcomingMovieAdapter.setData() })
-        movieViewModel.getTopRatedMovies().observe(this, { topRatedMovieAdapter.setData()})
+      //  movieViewModel.getPopularMovies().observe(this, { popularMovieAdapter.setData() })
+       // movieViewModel.getUpcomingMovies().observe(this, { upcomingMovieAdapter.setData() })
+       // movieViewModel.getTopRatedMovies().observe(this, { topRatedMovieAdapter.setData()})
         // movieViewModel.getMovies().observe(this,{adapter.movieList})
 
         /* Orientation Checker*/
@@ -108,11 +104,12 @@ class MainActivity : AppCompatActivity(){
 
 
     }
-    override fun onStart() {
-        super.onStart()
+    /*
+    override fun onResume() {
+        super.onResume()
         movieViewModel.loadTopRatedMovies(topRatedMovieList)
-        movieViewModel.loadPopularMovies(popularMovieList,1)
+        movieViewModel.loadPopularMovies(popularMovieList)
         movieViewModel.loadUpcomingMovies(upcomingMovieList)
 
-    }
+    }*/
 }
