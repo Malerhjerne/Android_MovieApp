@@ -1,5 +1,6 @@
 package com.example.movie_app.adapters
 
+import android.os.Debug
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
-class PopularMovieAdapter(private val clickListener:OnItemClickListener) : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
+class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
     var movieList = ArrayList<MovieModel>()       //
     var movieViewModel = MovieViewModel()
@@ -22,11 +24,11 @@ class PopularMovieAdapter(private val clickListener:OnItemClickListener) : Recyc
 
 
     init {
-        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(1)
+        movieViewModel.loadPopularMoviesFromPopularMovieAdapter(movieList,1)
 
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),OnItemClickListener {
         val textView: TextView
         val imageView: ImageView
 
@@ -36,18 +38,25 @@ class PopularMovieAdapter(private val clickListener:OnItemClickListener) : Recyc
             imageView = view.findViewById(R.id.movieImageView)
             view.setOnClickListener(this)
         }
+
+        override fun onItemClick(position: Int) {
+            Log.i("CHEKKK",position.toString())
+            Log.i("CHEKKK",movieList[position].title)
+        }
+
         override fun onClick(v: View?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION) {
-                clickListener.onItemClick(position);
+               onItemClick(position);
             }
         }
     }
 
+    /*
     interface OnItemClickListener{
         fun onItemClick(position: Int);
     }
-
+*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_recyclerview_layout,parent,false)

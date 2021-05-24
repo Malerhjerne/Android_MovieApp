@@ -54,7 +54,7 @@ class MovieViewModel: ViewModel() {
         }
     }
 
-    fun loadPopularMoviesFromPopularMovieAdapter(page: Int) {  // copyList: ArrayList<MovieModel>
+    fun loadPopularMoviesFromPopularMovieAdapter(copyList: ArrayList<MovieModel>,page: Int) {  //
         // Do an asynchronous operation to fetch users
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -65,7 +65,7 @@ class MovieViewModel: ViewModel() {
                     moviePopularRecyclerListData.postValue(response!!.movies)
 
 
-                    //copyList.addAll(response.movies)
+                    copyList.addAll(response.movies)
                     moviePopularArrayList.addAll(response.movies)
 
                 } else {

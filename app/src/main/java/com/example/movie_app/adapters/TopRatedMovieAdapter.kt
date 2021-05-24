@@ -8,13 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
 import com.example.movie_app.views.MainActivity
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
-class TopRatedMovieAdapter(private val clickListener: MainActivity):RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedViewHolder>(){
+class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedViewHolder>()
+    {
 
         var movieList = ArrayList<MovieModel>()
         var movieViewModel = MovieViewModel()
@@ -26,7 +28,7 @@ class TopRatedMovieAdapter(private val clickListener: MainActivity):RecyclerView
 
         }
 
-        inner class TopRatedViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        inner class TopRatedViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener,OnItemClickListener {
             val textView: TextView
             val imageView: ImageView
 
@@ -36,17 +38,24 @@ class TopRatedMovieAdapter(private val clickListener: MainActivity):RecyclerView
                 imageView = view.findViewById(R.id.movieImageView)
                 view.setOnClickListener(this)
             }
+
+            override fun onItemClick(position: Int) {
+
+                    Log.i("CHEKKK",position.toString())
+                    Log.i("CHEKKK",movieList[position].title)
+
+                }
+
+
             override fun onClick(v: View?) {
                 val position = adapterPosition
                 if(position != RecyclerView.NO_POSITION) {
-                    clickListener.onItemClick(position);
+                   onItemClick(position);
                 }
             }
         }
 
-        interface OnItemClickListener{
-            fun onItemClick(position: Int);
-        }
+
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder {

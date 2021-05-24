@@ -2,7 +2,6 @@ package com.example.movie_app.views
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,7 @@ import com.example.movie_app.adapters.UpcomingMovieAdapter
 import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
 
-class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListener,UpcomingMovieAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(){
     /*ViewModel */
     private var movieViewModel = MovieViewModel()
 
@@ -49,11 +48,6 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        /*Calling Api */
-        movieViewModel.loadPopularMovies()
-      //  movieViewModel.loadPopularMoviesFromPopularMovieAdapter(1)
-
-        movieViewModel.loadTopRatedMovies(topRatedMovieList);
 
 
 
@@ -65,7 +59,7 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
         layoutManagerPopularMovies = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewPopularMovies.layoutManager = layoutManagerPopularMovies
 
-        popularMovieAdapter = PopularMovieAdapter(this)
+        popularMovieAdapter = PopularMovieAdapter()
         recyclerViewPopularMovies.adapter = popularMovieAdapter
 
         /* Upcoming*/
@@ -75,7 +69,7 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
         layoutManagerUpcoming = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewUpcomingMovies.layoutManager = layoutManagerUpcoming
 
-        upcomingMovieAdapter = UpcomingMovieAdapter(this)
+        upcomingMovieAdapter = UpcomingMovieAdapter()
         recyclerViewUpcomingMovies.adapter = upcomingMovieAdapter
 
         /*Top Rated */
@@ -85,7 +79,7 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
         layoutManagerTopRated = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         recyclerViewTopRatedMovies.layoutManager = layoutManagerTopRated
 
-        topRatedMovieAdapter = TopRatedMovieAdapter(this)
+        topRatedMovieAdapter = TopRatedMovieAdapter()
         recyclerViewTopRatedMovies.adapter = topRatedMovieAdapter
 
         /*Observing */
@@ -100,9 +94,6 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
 
         } else {
             findViewById<Button>(R.id.testBtn).setOnClickListener({
-
-                Log.i("CHEK NU HER",movieViewModel.moviePopularArrayList.size.toString())
-                Log.i("CHEK NU HER",topRatedMovieList.size.toString())
             })
 
         }
@@ -110,9 +101,5 @@ class MainActivity : AppCompatActivity(), PopularMovieAdapter.OnItemClickListene
 
 
     }
-    override fun onItemClick(position: Int) {
-        Log.i("Interace Chek", position.toString())
-        // Åbne Fragment -- ID
 
-    }
 }
