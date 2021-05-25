@@ -1,26 +1,19 @@
 package com.example.movie_app.adapters
 
 import android.os.Bundle
-import android.os.Debug
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-import com.example.movie_app.MovieFragment
-import com.example.movie_app.OnItemClickListener
+import com.example.movie_app.views.MovieFragment
 import com.example.movie_app.R
-import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
-import com.example.movie_app.views.MainActivity
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
@@ -32,7 +25,7 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
 
 
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),OnItemClickListener {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), OnItemClickListener {
         val textView: TextView
         val imageView: ImageView
 
@@ -58,7 +51,7 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
         override fun onClick(v: View?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION) {
-               onItemClick(position);
+               onItemClick(position)
                 val activity = v!!.context as FragmentActivity
                 activity.supportFragmentManager.commit {
                     setReorderingAllowed(true)
@@ -73,7 +66,7 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_recyclerview_layout,parent,false)
 
-        return ViewHolder(layoutInflater);
+        return ViewHolder(layoutInflater)
     }
 
     override fun getItemCount(): Int {
@@ -86,6 +79,6 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
 
         val urlTocall = String.format(api_url + movieList[position].posterPath,)
         Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
-        Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
+        Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView)
     }
 }

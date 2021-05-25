@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movie_app.MovieFragment
-import com.example.movie_app.OnItemClickListener
+import com.example.movie_app.views.MovieFragment
 import com.example.movie_app.R
 import com.example.movie_app.viewmodels.MovieViewModel
 
@@ -73,7 +72,7 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
                 false
             )
 
-            return UpcomingViewHolder(layoutInflater);
+            return UpcomingViewHolder(layoutInflater)
         }
 
         override fun getItemCount(): Int {
@@ -86,7 +85,7 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
 
             val urlTocall = String.format(api_url + movieList[position].posterPath)
             Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
-            Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
+            Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView)
 
         }
     }

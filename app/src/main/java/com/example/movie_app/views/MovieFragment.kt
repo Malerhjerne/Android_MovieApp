@@ -1,4 +1,4 @@
-package com.example.movie_app
+package com.example.movie_app.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import kotlinx.coroutines.InternalCoroutinesApi
 import com.bumptech.glide.Glide
+import com.example.movie_app.R
 
 
 const val _PosterUrlBase = "https://image.tmdb.org/t/p/w342"
@@ -27,9 +28,7 @@ class MovieFragment : Fragment() {
     private var movieImage:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-
-       var movID = arguments?.getLong("movID")
+        super.onCreate(savedInstanceState)
 
         _movID = arguments?.getLong("movID")
         _movTitle = arguments?.getString("movTitle")
@@ -71,7 +70,7 @@ class MovieFragment : Fragment() {
 
     @InternalCoroutinesApi
      fun openMovieReviewFragment(){
-         val movieReviewFragment = MovieReviewFragment();
+         val movieReviewFragment = MovieReviewFragment()
          var bundle = Bundle()
 
          bundle.putString("movieimage",movieImage)
@@ -80,7 +79,6 @@ class MovieFragment : Fragment() {
          this.activity?.supportFragmentManager?.commit {
              setReorderingAllowed(true)
              replace(R.id.fragment,movieReviewFragment)
-
              addToBackStack("UpcomingFragment")}
      }
 }

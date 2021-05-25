@@ -10,8 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movie_app.MovieFragment
-import com.example.movie_app.OnItemClickListener
+import com.example.movie_app.views.MovieFragment
 import com.example.movie_app.R
 import com.example.movie_app.viewmodels.MovieViewModel
 
@@ -23,7 +22,8 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
         var movieList = movieViewModel.movieTopRatedArrayList
         val movFragment = MovieFragment()
 
-        inner class TopRatedViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener,OnItemClickListener {
+        inner class TopRatedViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener,
+            OnItemClickListener {
             val textView: TextView
             val imageView: ImageView
 
@@ -50,7 +50,7 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
             override fun onClick(v: View?) {
                 val position = adapterPosition
                 if(position != RecyclerView.NO_POSITION) {
-                   onItemClick(position);
+                   onItemClick(position)
 
                     val activity = v!!.context as FragmentActivity
                     activity.supportFragmentManager.commit {
@@ -65,7 +65,7 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_recyclerview_layout,parent,false)
 
-            return TopRatedViewHolder(layoutInflater);
+            return TopRatedViewHolder(layoutInflater)
         }
 
         override fun getItemCount(): Int {
@@ -78,6 +78,6 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
 
             val urlTocall = String.format(api_url + movieList[position].posterPath,)
             Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
-            Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
+            Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView)
         }
     }
