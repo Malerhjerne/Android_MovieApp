@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity(){
 
     }
 
+     /*Function dosent work  */
     fun startFragment(bundle: Bundle){
 
             val movFragment = BlueFragment()

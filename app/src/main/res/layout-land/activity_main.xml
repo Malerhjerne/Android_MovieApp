@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="4dp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -78,6 +84,9 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 tools:listitem="@layout/movie_recyclerview_layout" />
+
+
+
         </LinearLayout>
     </ScrollView>
 

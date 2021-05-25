@@ -8,8 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movie_app.BlueFragment
+import com.example.movie_app.MovieFragment
 import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
 import com.example.movie_app.models.MovieModel
@@ -20,17 +26,13 @@ private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
-    var mainacc = MainActivity()
-    
     //var movieList = ArrayList<MovieModel>()       // used when calling api from adapter -- now api is called in viewmodel
     var movieViewModel = MovieViewModel()
     var movieList = movieViewModel.moviePopularArrayList
     private var pageCounter:Int = 1;
+    val movFragment = MovieFragment()
 
-    init {
-      //  movieViewModel.loadPopularMovies(movieList)
-      //  Log.i("Check API LoadPopular","Loading Popular")
-    }
+
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),OnItemClickListener {
         val textView: TextView
@@ -44,6 +46,8 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
         }
 
         override fun onItemClick(position: Int) {
+            Log.i("CHEKKKposList",movieList.size.toString())
+
             Log.i("CHEKKKpos",position.toString())
             Log.i("CHEKKKtitle",movieList[position].title)
             Log.i("CHEKKKid",movieList[position].id.toString())
@@ -56,14 +60,19 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
             bundle.putString("movBackdrop", movieList[position].backdropPath)
             bundle.putFloat("movAvgRating", movieList[position].rating)
             bundle.putString("movReleaseDate", movieList[position].releaseDate)
-
-            //mainacc.startfragment(bundle)
+            movFragment.setArguments(bundle)
         }
 
         override fun onClick(v: View?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION) {
                onItemClick(position);
+                val activity = v!!.context as FragmentActivity
+                activity.supportFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace(R.id.fragment,movFragment)
+                    addToBackStack("UpcomingFragment")}
+
             }
         }
     }
@@ -100,6 +109,6 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
     fun setData(){
 
         notifyDataSetChanged()
-        Log.i("Check NotifyDataSetChanged","Are ve Here")
+        Log.i("Check NotifyDataSetChanged","PopularMovie")
     }
 }

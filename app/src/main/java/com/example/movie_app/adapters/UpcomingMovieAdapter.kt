@@ -11,14 +11,14 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.fragment.app.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_app.MovieFragment
 import com.example.movie_app.BlueFragment
 import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
+import com.example.movie_app.models.MovieModel
 import com.example.movie_app.viewmodels.MovieViewModel
 import com.example.movie_app.views.MainActivity
 import com.google.gson.annotations.SerializedName
@@ -32,15 +32,11 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
       //  var movieList = ArrayList<MovieModel>()       //
         var movieViewModel = MovieViewModel()
         var movieList = movieViewModel.movieUpcomingArrayList
+        val movFragment = MovieFragment()
 
-    val movFragment = BlueFragment()
         private var pageCounter:Int = 1;
 
-        init {
-            movieViewModel.loadUpcomingMovies(movieList)
-            Log.i("Teess", "Er Vi her ")
 
-        }
 
         inner class UpcomingViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener,
             OnItemClickListener {
@@ -56,6 +52,12 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
 
 
                 override fun onItemClick(position: Int) {
+                    Log.i("CHEKKKposList",movieList.size.toString())
+
+                    Log.i("CHEKKKpos",position.toString())
+                    Log.i("CHEKKKtitle",movieList[position].title)
+                    Log.i("CHEKKKid",movieList[position].id.toString())
+
                     var bundle = Bundle()
                     bundle.putLong("movID", movieList[position].id)
                     bundle.putString("movTitle", movieList[position].title)
@@ -65,7 +67,6 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
                     bundle.putFloat("movAvgRating", movieList[position].rating)
                     bundle.putString("movReleaseDate", movieList[position].releaseDate)
                     movFragment.setArguments(bundle)
-                    //mainacc.startfragment(bundle)
                 }
 
 
@@ -74,13 +75,17 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
 
 
                 if(position != RecyclerView.NO_POSITION) {
-                    onItemClick(position);
+                    onItemClick(position)
 
-                    val activity = v!!.context as AppCompatActivity
+                    val activity = v!!.context as FragmentActivity
+
+
+
                     activity.supportFragmentManager.commit {
                         setReorderingAllowed(true)
-                        replace<BlueFragment>(R.id.fragment)
-                        addToBackStack("whiteFrag")}
+                        replace(R.id.fragment,movFragment)
+                        addToBackStack("UpcomingFragment")}
+
                 }
             }
         }
