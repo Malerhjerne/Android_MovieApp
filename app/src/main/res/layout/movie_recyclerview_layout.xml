@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/movieImageView"
-        android:layout_width="86.25dp"
+        android:layout_width="76.7dp"
         android:layout_height="115dp"
         android:scaleX="2"
         app:layout_constraintEnd_toEndOf="parent"
