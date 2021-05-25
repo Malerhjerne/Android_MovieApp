@@ -90,9 +90,13 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
                         userComment = userComment
                 )
                 movieReviewDB.userReviewDao().insertAll(updatedReview)
+                val text = "You Have Submitted Your Review!"
+                val duration = Toast.LENGTH_LONG
+                val toast = Toast.makeText(v.context, text, duration)
+                toast.show()
             }
             else{
-                val text = "You Have Submitted Your Review!"
+                val text = "You need to give the movie a Rating!"
                 val duration = Toast.LENGTH_LONG
                 val toast = Toast.makeText(v.context, text, duration)
                 toast.show()
