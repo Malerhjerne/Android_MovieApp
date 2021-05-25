@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.movie_app.database.MovieAppDatabase
 import com.example.movie_app.models.UserReview
 import kotlinx.coroutines.CoroutineScope
@@ -16,23 +17,24 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 
 @InternalCoroutinesApi
+const val ApiUrlBase = "https://image.tmdb.org/t/p/w342"
 class MovieReviewFragment: Fragment(R.layout.movie_review) {
     private lateinit var movieReviewDB : MovieAppDatabase
     private lateinit var userReview: UserReview
     private var selectedBtn = 0;
-
-    private lateinit var userName:EditText
-    private lateinit var rating:RadioGroup
+    private var movImage :String? =""
 
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
 
-   //     var movID = arguments?.getLong("movID")
-   //     Log.i("CHEK FRAGMENT", movID.toString())
+    movImage = arguments?.getString("movieimage").toString()
+        Log.i("CHEK FRAGMENT", movImage.toString())
 
     }
 
+    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +45,31 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
         v.findViewById<Button>(R.id.showLog).setOnClickListener { showLog() }
         //  val reviews : Flow<List<UserReview>> = movieReviewDB.userReview().getAll()
         v.findViewById<Button>(R.id.sendReview).setOnClickListener{updateReviews()}
+
+        var imageView = v.findViewById<ImageView>(R.id.movieReviewImage)
+
+        val moviePosterURL = _PosterUrlBase + movImage
+        Glide.with(imageView.context).clear(imageView)
+
+        Glide.with(imageView.context).load(moviePosterURL).into(imageView)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+
+
+            movieReviewDB = MovieAppDatabase.getDatabase(v.context)!!
+            if(movieReviewDB.userReviewDao().countReviews() == 0){
+
+                userReview = UserReview(
+                    uid = 1,
+                    userName = "TestPerson",
+                    userRating = 3,
+                    userComment = "SomeComment"
+
+                )
+            }
+        }
 
         return v
     }

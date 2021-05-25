@@ -23,13 +23,14 @@ const val _PosterUrlBase = "https://image.tmdb.org/t/p/w342"
 
 class MovieFragment : Fragment() {
 
+
     private var _movID: Long? = 0
     private var _movTitle: String? = ""
     private var _movOverview: String? = ""
     private var _movPosterpath: String? = ""
     private var _movAvgRating: Float? = 0F
     private var _movReleaseDate: String? = ""
-
+    private var movieImage:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,11 @@ class MovieFragment : Fragment() {
         bundle.putFloat("movAvgRating", movieList[position].rating)
         bundle.putString("movReleaseDate", movieList[position].releaseDate)
         */
+
+        movieImage = _movPosterpath
+
+        Log.i("CHEK FRAGMENT", movieImage.toString())
+
 
         Log.i("CHEK FRAGMENT", _movID.toString())
 
@@ -89,13 +95,17 @@ class MovieFragment : Fragment() {
     }
 
 
- @InternalCoroutinesApi
- fun openMovieReviewFragment(){
 
+ fun openMovieReviewFragment(){
+     val movieReviewFragment = MovieReviewFragment();
+     var bundle = Bundle()
+
+     bundle.putString("movieimage",movieImage)
+     movieReviewFragment.setArguments(bundle)
 
      this.activity?.supportFragmentManager?.commit {
          setReorderingAllowed(true)
-         replace<MovieReviewFragment>(R.id.fragment)
+         replace(R.id.fragment,movieReviewFragment)
 
          addToBackStack("UpcomingFragment")}
  }

@@ -52,29 +52,13 @@ class MainActivity : AppCompatActivity(){
     private lateinit var movieReviewDB : MovieAppDatabase
     private lateinit var userReview: UserReview
 
-    @InternalCoroutinesApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularMovieAdapter = PopularMovieAdapter()
         upcomingMovieAdapter = UpcomingMovieAdapter()
         topRatedMovieAdapter = TopRatedMovieAdapter()
 
-        CoroutineScope(Dispatchers.IO).launch {
-
-
-
-            movieReviewDB = MovieAppDatabase.getDatabase(applicationContext)!!
-            if(movieReviewDB.userReviewDao().countReviews() == 0){
-
-                userReview = UserReview(
-                    uid = 1,
-                    userName = "TestPerson",
-                    userRating = 3,
-                    userComment = "SomeComment"
-
-                )
-            }
-        }
 
         setContentView(R.layout.activity_main)
         val view = this.window.decorView
