@@ -80,7 +80,7 @@ class TopRatedMovieAdapter():RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedV
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_toprated_recyclerview_layout,parent,false)
+            val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.movie_recyclerview_layout,parent,false)
 
             return TopRatedViewHolder(layoutInflater);
         }

@@ -8,11 +8,8 @@
 
     <ImageView
         android:id="@+id/movieImageView"
-        android:layout_width="392dp"
-        android:layout_height="147dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="86.25dp"
+        android:layout_height="115dp"
         android:scaleX="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +18,8 @@
 
     <TextView
         android:id="@+id/titleTextView2"
-        android:layout_width="91dp"
-        android:layout_height="98dp"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
         android:layout_marginStart="92dp"
         android:layout_marginEnd="92dp"
         android:text="Title"

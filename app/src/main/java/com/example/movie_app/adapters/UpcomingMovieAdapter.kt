@@ -95,7 +95,7 @@ class UpcomingMovieAdapter():RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingV
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context).inflate(
-                R.layout.movie_upcoming_recyclerview_layout,
+                R.layout.movie_recyclerview_layout,
                 parent,
                 false
             )
