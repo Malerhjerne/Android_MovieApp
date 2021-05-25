@@ -84,19 +84,21 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
 
             if (userRatingGroup != null) {
                 selectedBtn = userRatingGroup.checkedRadioButtonId
+                val ratingAsText = v?.findViewById<RadioButton>(selectedBtn)?.text.toString()
+                val ratingAsInt = ratingAsText.toInt()
+
+                val userComment = v?.findViewById<EditText>(R.id.editComment)?.text.toString()
+                val updatedReview = UserReview(
+                        uid = movieReviewDB.userReviewDao().countReviews() + 1,
+                        userName = userName,
+                        userRating = ratingAsInt,
+                        userComment = userComment
+                )
+                movieReviewDB.userReviewDao().insertAll(updatedReview)
             }
-
-            val ratingAsText = v?.findViewById<RadioButton>(selectedBtn)?.text.toString()
-            val ratingAsInt = ratingAsText.toInt()
-
-            val userComment = v?.findViewById<EditText>(R.id.editComment)?.text.toString()
-            val updatedReview = UserReview(
-                uid = movieReviewDB.userReviewDao().countReviews() + 1,
-                userName = userName,
-                userRating = ratingAsInt,
-                userComment = userComment
-            )
-            movieReviewDB.userReviewDao().insertAll(updatedReview)
+            else{
+                //
+            }
         }
     }
 
