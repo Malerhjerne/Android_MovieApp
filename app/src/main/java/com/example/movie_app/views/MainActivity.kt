@@ -12,14 +12,20 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movie_app.BlueFragment
+
 import com.example.movie_app.MovieFragment
 import com.example.movie_app.R
 import com.example.movie_app.adapters.PopularMovieAdapter
 import com.example.movie_app.adapters.TopRatedMovieAdapter
 import com.example.movie_app.adapters.UpcomingMovieAdapter
+import com.example.movie_app.database.MovieAppDatabase
 import com.example.movie_app.models.MovieModel
+import com.example.movie_app.models.UserReview
 import com.example.movie_app.viewmodels.MovieViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(){
     /*ViewModel */
@@ -43,14 +49,32 @@ class MainActivity : AppCompatActivity(){
     private lateinit var recyclerViewTopRatedMovies: RecyclerView
     private lateinit var layoutManagerTopRated: RecyclerView.LayoutManager
 
+    private lateinit var movieReviewDB : MovieAppDatabase
+    private lateinit var userReview: UserReview
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularMovieAdapter = PopularMovieAdapter()
         upcomingMovieAdapter = UpcomingMovieAdapter()
         topRatedMovieAdapter = TopRatedMovieAdapter()
 
+        CoroutineScope(Dispatchers.IO).launch {
 
+
+
+            movieReviewDB = MovieAppDatabase.getDatabase(applicationContext)!!
+            if(movieReviewDB.userReviewDao().countReviews() == 0){
+
+                userReview = UserReview(
+                    uid = 1,
+                    userName = "TestPerson",
+                    userRating = 3,
+                    userComment = "SomeComment"
+
+                )
+            }
+        }
 
         setContentView(R.layout.activity_main)
         val view = this.window.decorView
@@ -135,16 +159,6 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-     /*Function dosent work  */
-    fun startFragment(bundle: Bundle){
 
-            val movFragment = BlueFragment()
-        movFragment.setArguments(bundle)
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add<BlueFragment>(R.id.fragment)
-
-    }
-}
 }
 

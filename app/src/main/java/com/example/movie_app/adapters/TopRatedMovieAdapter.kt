@@ -13,7 +13,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movie_app.BlueFragment
+
 import com.example.movie_app.MovieFragment
 import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R

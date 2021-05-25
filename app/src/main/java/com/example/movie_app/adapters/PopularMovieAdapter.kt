@@ -14,7 +14,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movie_app.BlueFragment
+
 import com.example.movie_app.MovieFragment
 import com.example.movie_app.OnItemClickListener
 import com.example.movie_app.R
@@ -26,7 +26,7 @@ private const val api_url = "https://image.tmdb.org/t/p/w342/"
 /*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
-    //var movieList = ArrayList<MovieModel>()       // used when calling api from adapter -- now api is called in viewmodel
+
     var movieViewModel = MovieViewModel()
     var movieList = movieViewModel.moviePopularArrayList
     private var pageCounter:Int = 1;
