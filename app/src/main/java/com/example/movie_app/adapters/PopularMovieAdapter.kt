@@ -23,13 +23,11 @@ import com.example.movie_app.viewmodels.MovieViewModel
 import com.example.movie_app.views.MainActivity
 
 private const val api_url = "https://image.tmdb.org/t/p/w342/"
-/*https://image.tmdb.org/t/p/w342/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg*/
 class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>() {
 
 
     var movieViewModel = MovieViewModel()
     var movieList = movieViewModel.moviePopularArrayList
-    private var pageCounter:Int = 1;
     val movFragment = MovieFragment()
 
 
@@ -46,12 +44,6 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
         }
 
         override fun onItemClick(position: Int) {
-            Log.i("CHEKKKposList",movieList.size.toString())
-
-            Log.i("CHEKKKpos",position.toString())
-            Log.i("CHEKKKtitle",movieList[position].title)
-            Log.i("CHEKKKid",movieList[position].id.toString())
-
             var bundle = Bundle()
             bundle.putLong("movID", movieList[position].id)
             bundle.putString("movTitle", movieList[position].title)
@@ -90,25 +82,10 @@ class PopularMovieAdapter() : RecyclerView.Adapter<PopularMovieAdapter.ViewHolde
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        Log.i("Check OnBindViewHolder Position",position.toString())
-        Log.i("Chek Glide",movieList[position].posterPath.toString())
-
         viewHolder.textView.text = movieList[position].title
 
         val urlTocall = String.format(api_url + movieList[position].posterPath,)
         Glide.with(viewHolder.imageView.context).clear(viewHolder.imageView)
         Glide.with(viewHolder.imageView.context).load(urlTocall).into(viewHolder.imageView);
-
-
-        if (position == movieList.size -1){
-
-           // pageCounter++;
-        }
-    }
-
-    fun setData(){
-
-        notifyDataSetChanged()
-        Log.i("Check NotifyDataSetChanged","PopularMovie")
     }
 }

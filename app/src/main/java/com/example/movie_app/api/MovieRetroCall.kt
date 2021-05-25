@@ -4,11 +4,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MovieRetroCall {
-
-
         private const val api_url = "https://api.themoviedb.org/3/"
 
-        private fun provideRetrofit(): Retrofit {
+        private fun provideRetrofit(): Retrofit{
             return Retrofit.Builder()
                 .baseUrl(api_url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -16,6 +14,6 @@ object MovieRetroCall {
         }
 
         val apiService: MovieApiRequest = provideRetrofit().create(MovieApiRequest::class.java)
-        }
+}
 
 

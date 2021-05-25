@@ -21,17 +21,15 @@ abstract class MovieAppDatabase : RoomDatabase() {
 
 
         fun getDatabase (context: Context):MovieAppDatabase?{
-            //if ithe instance is not null - return it else create database
+            //if the instance is not null - return it else create database
             if(INSTANCE == null) {
-                //return INSTANCE ?: synchronized(this){
 
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
                     MovieAppDatabase::class.java,
                     "UserReviews"
-                ).build()           // allowOnmainthred.build
-                //  INSTANCE =instance
-                // instance
+                ).build()
+                // allowOnmainthred.build
             }
             return INSTANCE
         }

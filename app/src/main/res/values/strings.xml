@@ -11,4 +11,21 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="movie">movie</string>
+    <string name="release_date">Release Date:</string>
+    <string name="_2019">2019</string>
+    <string name="rating">Rating:</string>
+    <string name="_8">8</string>
+    <string name="runtime">Runtime:</string>
+    <string name="_2_3_hr">2.3 hr</string>
+    <string name="overview">Overview</string>
+    <string name="overviewtext">overview .........</string>
+    <string name="image_for_movie">image for movie</string>
+    <string name="make_your_own_review">Make Your Own Review</string>
+    <string name="title">Title</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
 </resources>

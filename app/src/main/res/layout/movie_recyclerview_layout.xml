@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/movieImageView"
+        android:contentDescription="@string/image_for_movie"
         android:layout_width="76.7dp"
         android:layout_height="115dp"
-        android:scaleX="2"
+        android:scaleX="1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,13 +19,14 @@
 
     <TextView
         android:id="@+id/titleTextView2"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Title"
+        android:text="@string/title"
         android:textAlignment="center"
         android:textColor="@color/orange"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

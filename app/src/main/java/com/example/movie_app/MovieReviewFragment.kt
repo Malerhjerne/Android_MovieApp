@@ -11,13 +11,11 @@ import com.bumptech.glide.Glide
 import com.example.movie_app.database.MovieAppDatabase
 import com.example.movie_app.models.UserReview
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 
 @InternalCoroutinesApi
-const val ApiUrlBase = "https://image.tmdb.org/t/p/w342"
 class MovieReviewFragment: Fragment(R.layout.movie_review) {
     private lateinit var movieReviewDB : MovieAppDatabase
     private lateinit var userReview: UserReview
@@ -41,22 +39,15 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.movie_review, container, false)
-
         v.findViewById<Button>(R.id.showLog).setOnClickListener { showLog() }
-        //  val reviews : Flow<List<UserReview>> = movieReviewDB.userReview().getAll()
         v.findViewById<Button>(R.id.sendReview).setOnClickListener{updateReviews()}
 
         var imageView = v.findViewById<ImageView>(R.id.movieReviewImage)
-
         val moviePosterURL = _PosterUrlBase + movImage
         Glide.with(imageView.context).clear(imageView)
-
         Glide.with(imageView.context).load(moviePosterURL).into(imageView)
 
-
-        CoroutineScope(Dispatchers.IO).launch {
-
-
+        CoroutineScope(IO).launch {
 
             movieReviewDB = MovieAppDatabase.getDatabase(v.context)!!
             if(movieReviewDB.userReviewDao().countReviews() == 0){
@@ -66,6 +57,10 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
                     userName = "TestPerson",
                     userRating = 3,
                     userComment = "SomeComment"
+
+                )
+
+                movieReviewDB.userReviewDao().insertAll(userReview)
 
                 )
             }
@@ -105,8 +100,8 @@ class MovieReviewFragment: Fragment(R.layout.movie_review) {
         }
     }
 
-    public fun showLog(){
-        CoroutineScope(Dispatchers.IO).launch {
+    fun showLog(){
+        CoroutineScope(IO).launch {
             val reviewDao = movieReviewDB.userReviewDao()
             val reviews :List<UserReview> = reviewDao.getAll()
 
